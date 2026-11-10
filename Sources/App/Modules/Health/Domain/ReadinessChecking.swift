@@ -1,3 +1,3 @@
 protocol ReadinessChecking: Sendable {
-    func check() async throws
+  func check() async throws
 }

@@ -10,14 +10,14 @@ Os testes HTTP instalam uma fixture de identidade somente no target de testes. O
 
 ## Rotas
 
-| Método | Caminho | Permissão | Resposta |
-| --- | --- | --- | --- |
-| GET | `/health` | Pública | 200 com status, serviço e versão |
-| GET | `/health/ready` | Pública | 200 ou 503, sem detalhes internos |
-| GET | `/users` | Administrador ativo | 200 com itens e metadados |
-| GET | `/users/:userID` | Proprietário ativo ou administrador ativo | 200 com perfil |
-| PATCH | `/users/:userID` | Proprietário ativo ou administrador ativo | 200 com perfil atualizado |
-| DELETE | `/users/:userID` | Proprietário ativo ou administrador ativo | 204 após desativação lógica |
+| Método | Caminho          | Permissão                                 | Resposta                          |
+| ------ | ---------------- | ----------------------------------------- | --------------------------------- |
+| GET    | `/health`        | Pública                                   | 200 com status, serviço e versão  |
+| GET    | `/health/ready`  | Pública                                   | 200 ou 503, sem detalhes internos |
+| GET    | `/users`         | Administrador ativo                       | 200 com itens e metadados         |
+| GET    | `/users/:userID` | Proprietário ativo ou administrador ativo | 200 com perfil                    |
+| PATCH  | `/users/:userID` | Proprietário ativo ou administrador ativo | 200 com perfil atualizado         |
+| DELETE | `/users/:userID` | Proprietário ativo ou administrador ativo | 204 após desativação lógica       |
 
 Um membro não pode consultar, editar ou desativar outro UUID. A autorização precede a consulta ao usuário alvo: um UUID alheio válido retorna 403 para membros, mesmo se não existir. Administradores recebem 404 para um alvo inexistente.
 
@@ -69,16 +69,16 @@ Ainda é usado o formato nativo do Vapor, por exemplo:
 {"error":true,"reason":"Authentication required"}
 ```
 
-| Código | Situação |
-| --- | --- |
-| 400 | UUID, query, JSON ou dados inválidos; perfil vazio |
-| 401 | Sem identidade, identidade inexistente ou conta inativa |
-| 403 | Sem permissão ou tentativa de editar conta inativa |
-| 404 | Alvo inexistente para solicitante autorizado |
-| 409 | Email já cadastrado, incluindo contas desativadas |
-| 413 | Corpo acima do limite configurado |
-| 415 | Content-Type não suportado pelo decodificador |
-| 500 | Falha interna; sem SQL, caminhos ou credenciais |
+| Código | Situação                                                |
+| ------ | ------------------------------------------------------- |
+| 400    | UUID, query, JSON ou dados inválidos; perfil vazio      |
+| 401    | Sem identidade, identidade inexistente ou conta inativa |
+| 403    | Sem permissão ou tentativa de editar conta inativa      |
+| 404    | Alvo inexistente para solicitante autorizado            |
+| 409    | Email já cadastrado, incluindo contas desativadas       |
+| 413    | Corpo acima do limite configurado                       |
+| 415    | Content-Type não suportado pelo decodificador           |
+| 500    | Falha interna; sem SQL, caminhos ou credenciais         |
 
 O envelope central com `code`, `details` e `requestId` pertence à Fase 4. A especificação OpenAPI será criada na Fase 5.
 

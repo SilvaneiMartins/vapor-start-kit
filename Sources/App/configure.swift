@@ -7,6 +7,5 @@ func configure(_ app: Application) async throws {
   app.http.server.configuration.port = configuration.port
   app.routes.defaultMaxBodySize = "16kb"
   try configureDatabase(app, configuration: configuration)
-  app.passwords.use(.bcrypt)
   try routes(app)
 }

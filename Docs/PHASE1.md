@@ -19,15 +19,15 @@ O `AGENTS.md` preexistente foi lido e preservado. Sua revisão específica para 
 
 ## Evidências de validação
 
-| Comando | Resultado |
-| --- | --- |
-| `swift build` | Falhou antes de compilar: escrita no cache global de módulos proibida pelo ambiente |
-| `swift test` | Falhou antes de executar testes pelo mesmo bloqueio de cache |
-| Build com caches dentro de `.build` | O sandbox interno do SwiftPM também encontrou `sandbox_apply: Operation not permitted` |
-| Build/test com caches locais e `--disable-sandbox` | Manifesto processado, resolução de dependências bloqueada; erro de repositório ausente no cache após tentativas de fetch |
-| Build com `--disable-dependency-cache` | Confirmou o motivo: `Could not resolve host: github.com` ao clonar Vapor |
-| `swift package --disable-sandbox dump-package` com caches locais | Sucesso, exit code 0; descrição gerada em `.build/package-description.json` |
-| `swiftc -frontend -parse` sobre todos os arquivos Swift de Sources e Tests | Sucesso, exit code 0; apenas análise sintática, sem checagem de tipos ou linkedição |
+| Comando                                                                    | Resultado                                                                                                                |
+| -------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
+| `swift build`                                                              | Falhou antes de compilar: escrita no cache global de módulos proibida pelo ambiente                                      |
+| `swift test`                                                               | Falhou antes de executar testes pelo mesmo bloqueio de cache                                                             |
+| Build com caches dentro de `.build`                                        | O sandbox interno do SwiftPM também encontrou `sandbox_apply: Operation not permitted`                                   |
+| Build/test com caches locais e `--disable-sandbox`                         | Manifesto processado, resolução de dependências bloqueada; erro de repositório ausente no cache após tentativas de fetch |
+| Build com `--disable-dependency-cache`                                     | Confirmou o motivo: `Could not resolve host: github.com` ao clonar Vapor                                                 |
+| `swift package --disable-sandbox dump-package` com caches locais           | Sucesso, exit code 0; descrição gerada em `.build/package-description.json`                                              |
+| `swiftc -frontend -parse` sobre todos os arquivos Swift de Sources e Tests | Sucesso, exit code 0; apenas análise sintática, sem checagem de tipos ou linkedição                                      |
 
 As variáveis usadas nas tentativas com cache local foram:
 

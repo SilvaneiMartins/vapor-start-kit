@@ -8,16 +8,16 @@ Testes usam configurações exclusivas `.memory`; o SQLiteKit pode implementá-l
 
 ## Schema `users`
 
-| Campo | Tipo lógico | Restrição |
-| --- | --- | --- |
-| `id` | UUID | Chave primária |
-| `name` | String | Obrigatório |
-| `email` | String | Obrigatório, índice único `users_email_unique` |
-| `password_hash` | String | Obrigatório, bcrypt; nunca serializado em HTTP |
-| `is_active` | Bool | Obrigatório, criação pelo service usa `true` |
-| `role` | String | Obrigatório; service cria somente `member` |
-| `created_at` | Date | Obrigatório, definido na criação |
-| `updated_at` | Date | Obrigatório, atualizado nas mutações |
+| Campo           | Tipo lógico | Restrição                                      |
+| --------------- | ----------- | ---------------------------------------------- |
+| `id`            | UUID        | Chave primária                                 |
+| `name`          | String      | Obrigatório                                    |
+| `email`         | String      | Obrigatório, índice único `users_email_unique` |
+| `password_hash` | String      | Obrigatório, bcrypt; nunca serializado em HTTP |
+| `is_active`     | Bool        | Obrigatório, criação pelo service usa `true`   |
+| `role`          | String      | Obrigatório; service cria somente `member`     |
+| `created_at`    | Date        | Obrigatório, definido na criação               |
+| `updated_at`    | Date        | Obrigatório, atualizado nas mutações           |
 
 O service e o repository normalizam emails antes de gravar. A constraint SQL garante unicidade inclusive quando uma consulta prévia não detecta uma inserção concorrente. SQL manual e futuros importadores devem respeitar a mesma normalização; a collation padrão do SQLite não substitui essa regra.
 
